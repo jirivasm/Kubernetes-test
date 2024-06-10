@@ -1,0 +1,57 @@
+Project:
+
+Getting ArgoCD
+create namespace for ArgoCD
+	-kubectl create namespace argocd
+apply argocd deployment
+	-kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+Port forward to access the server
+	-kubectl port-forward -n argocd svc/argocd-server 8080:443
+Getting initial password
+	-kubectl get secrets argocd-initial-admin-secret -n argocd -o yaml
+Decode first password in Bash
+	-echo aGdCMExpVnBER0o1UVRQQw== | base64 -d
+
+HELM CHARTS
+-download the repo
+	-helm repo add name url
+	-helm repo update
+-install
+helm install <name> <chart name>
+
+create an application
+EXAMPLE
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: prometheus-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://prometheus-community.github.io/helm-charts
+    targetRevision: 13.7.2
+    chart: kube-prometheus-stack
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: myapp
+
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+
+    automated:
+      selfHeal: true
+      prune: true
+
+PORT FORWARD
+kubectl port-forward svc/metrics-kube-prometheus-st-prometheus -n myapp 8080:9090    
+Forwarding from 127.0.0.1:8080 -> 9090
+
+kubectl port-forward -n argocd svc/argocd-server 8080:443
+
+kubectl port-forward -n opa svc/open-policy-agent-opa-kube-mgmt 8081:8081
+
+
+
