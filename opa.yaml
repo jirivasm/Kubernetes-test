@@ -1,17 +1,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: metrics
+  name: open-policy-agent
   namespace: argocd
 spec:
   project: default
   source:
-    repoURL: https://prometheus-community.github.io/helm-charts
-    targetRevision: 60.0.2
-    chart: kube-prometheus-stack
+    repoURL: https://open-policy-agent.github.io/kube-mgmt/charts
+    targetRevision: 8.5.7
+    chart: opa-kube-mgmt
   destination:
     server: https://kubernetes.default.svc
-    namespace: prometheus
+    namespace: opa
   syncPolicy:
     syncOptions:
     - CreateNamespace=true
