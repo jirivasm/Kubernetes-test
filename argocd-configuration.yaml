@@ -10,7 +10,7 @@ spec:
     repoURL: https://github.com/jirivasm/Kubernetes-test.git
     targetRevision: HEAD
     path: /
-  destivation:
+  destination:
     server: https://kubernetes.default.svc
     namespace: myapp
 
