@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: gatekeeper
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://open-policy-agent.github.io/gatekeeper/charts
+    targetRevision: 8.5.7
+    chart: gatekeeper
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: opa
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+
+    automated:
+      selfHeal: true
+      prune: true
