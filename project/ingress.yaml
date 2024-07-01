@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: example-ingress
+  namespace: intern
+  # annotations:
+    # cert-manager.io/cluster-issuer: "letsencrypt-production"
+spec:
+  ingressClassName: nginx
+  # tls:
+  #   - secretName: intern.fts1.nbspreview.com
+  #     hosts:
+  #     - intern.fts1.nbspreview.com
+  rules:
+    - host: intern.fts1.nbspreview.com
+      http:
+        paths:
+          - path: /quote
+            pathType: Prefix
+            backend:
+              service:
+                name: demo-service
+                port:
+                  number: 8080

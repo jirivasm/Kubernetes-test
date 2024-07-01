@@ -1,0 +1,20 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: demo-service-loadbalancer
+  labels:
+    app: flask-demo
+    type: demo
+spec:
+  selector:
+    app: flask-demo
+    type: demo
+  ports:
+    - port: 5000
+      name: http
+      targetPort: 5000
+    - port: 443
+      name: https
+      targetPort: 5000
+  type: LoadBalancer

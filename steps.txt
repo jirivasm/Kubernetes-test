@@ -52,6 +52,41 @@ Forwarding from 127.0.0.1:8080 -> 9090
 kubectl port-forward -n argocd svc/argocd-server 8080:443
 
 kubectl port-forward -n opa svc/open-policy-agent-opa-kube-mgmt 8081:8081
+download gatekeeper
+  helm repo add gatekeeper https://open-policy-agent.github.io/gatekeeper/charts
+  helm repo update
+getting the chart
+  helm pull gatekeeper/gatekeeper
+unzipping tgz file
+  tar -xvzf gatekeeper-3.16.3.tgz gatekeeper/
+
+install gatekeeper
+helm install gatekeeper gatekeeper/gatekeeper \
+> --namespace gatekeeper --CreateNamespace=true\
+> --values gatekeeper/values.yaml
+
+Apply config file to exclude namespaces
+ kubectl apply -f gatekeeper/gatekeeper-config.yaml -n intern
+
+apply constraintsTemplates and the constraints 
+kubectl apply -f constraintTemplate/<constraintTemplateNAme> -n namespace
+kubectl apply -f constraints/<constraintName> -n namespace
+
+uninstall gatekeeper
+helm delete gatekeeper -n namespace
+
+remove labels
+kubectl label ns intern admission.gatekeeper.sh/ignore-
+kubectl label ns intern pod-security.kubernetes.io/audit-
+kubectl label ns intern pod-security.kubernetes.io/audit-version-
+kubectl label ns intern pod-security.kubernetes.io/enforce-
+kubectl label ns intern pod-security.kubernetes.io/enforce-version-
+kubectl label ns intern pod-security.kubernetes.io/warn-
+kubectl label ns intern pod-security.kubernetes.io/warn-version-
+
+upgrade chart
+helm upgrade gatekeeper -n gatekeeper -f helm\ charts/gatekeeper/values.yaml gatekeeper/gatekeeper
+
 
 
 

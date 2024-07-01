@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-demo
+  namespace: myapp
+  labels:
+    app: flask-demo
+    type: demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flask-demo
+      type: demo
+  template:
+    metadata:
+      labels:
+        app: flask-demo
+        type: demo
+    spec:
+      securityContext: {} 
+      containers:
+      - name: flask-demo
+        securityContext: {}
+        image: jirivasm/hello-wolrd-pyton:latest
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8080
+      
+       
