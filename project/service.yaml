@@ -6,6 +6,7 @@ metadata:
   labels:
     app: flask-demo
     type: demo
+    namespace: myapp
 spec:
   selector:
     app: flask-demo
