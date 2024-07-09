@@ -9,11 +9,6 @@ spec:
         kinds: ["Namespace"]
     excludedNamespaces:
     - kube*
-    - development
-    - myapp
-    - opa
     - default
-    - production
-    - prometheus
   parameters:
     labels: ["Owner"]

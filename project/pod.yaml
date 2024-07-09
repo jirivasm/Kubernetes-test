@@ -9,6 +9,7 @@ spec:
   containers:
   - name: myapp
     image: jirivasm/hello-wolrd-pyton:latest
+    securityContext: {}
     resources:
       limits:
         memory: "128Mi"

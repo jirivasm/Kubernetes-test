@@ -18,11 +18,16 @@ spec:
         app: flask-demo
         type: demo
     spec:
-      securityContext: {} 
       containers:
       - name: flask-demo
-        securityContext: {}
         image: jirivasm/hello-wolrd-pyton:latest
+        securityContext:
+          #privileged: true
+          #privileged is not allowed
+          runAsNonRoot: false
+          capabilities:
+            drop: ["ALL"]
+          
         resources:
           limits:
             memory: "128Mi"

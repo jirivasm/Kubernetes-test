@@ -1,7 +1,7 @@
 apiVersion: constraints.gatekeeper.sh/v1beta1
-kind: K8sPSPPrivilegedContainer
+kind: K8sPSPCapabilities
 metadata:
-  name: psp-privileged-container
+  name: capabilities-demo
 spec:
   match:
     kinds:
@@ -9,4 +9,7 @@ spec:
         kinds: ["Deployment","ReplicaSet", "StatefulSet", "DaemonSet"]
       - apiGroups: [""]
         kinds: ["Pod"]
-    excludedNamespaces: ["kube-*","default", "ingress-nginx"]
+    namespaces:
+      - "myapp"
+  parameters:
+    requiredDropCapabilities: ["ALL"]
