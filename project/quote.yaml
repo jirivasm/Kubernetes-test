@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: flask-demo
-  namespace: myapp
+  namespace: intern
   labels:
     app: flask-demo
     type: demo
@@ -24,7 +24,7 @@ spec:
         securityContext:
           #privileged: true
           #privileged is not allowed
-          runAsNonRoot: false
+          #runAsNonRoot: true
           capabilities:
             drop: ["ALL"]
           
