@@ -22,14 +22,17 @@ spec:
       - name: flask-demo
         image: jirivasm/hello-wolrd-pyton:latest
         securityContext:
-          #privileged: true
+          privileged: false
           #privileged is not allowed
-          #runAsNonRoot: true
+          runAsNonRoot: true
           capabilities:
-            drop: ["ALL"]
+           drop: ["ALL"]
           
         resources:
           limits:
+            memory: "2Gi"
+            cpu: "500m"
+          requests:
             memory: "128Mi"
             cpu: "500m"
         ports:

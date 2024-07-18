@@ -5,5 +5,5 @@ metadata:
   namespace: "gatekeeper-system"
 spec:
   match:
-    - excludedNamespaces: ["kube-*", "default", "argocd", "cert-manager","ingress-nginx","keycloack","observability" ]
+    - excludedNamespaces: ["kube-*", "default", "argocd", "cert-manager","ingress-nginx","keycloak","observability" ]
       processes: ["*"]

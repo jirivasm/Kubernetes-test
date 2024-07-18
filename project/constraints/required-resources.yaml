@@ -1,7 +1,7 @@
 apiVersion: constraints.gatekeeper.sh/v1beta1
-kind: K8sPSPCapabilities
+kind: K8sRequiredResources
 metadata:
-  name: capabilities
+  name: container-must-have-limits-and-requests
 spec:
   match:
     kinds:
@@ -10,4 +10,9 @@ spec:
       - apiGroups: [""]
         kinds: ["Pod"]
   parameters:
-    requiredDropCapabilities: ["ALL"]
+    limits:
+      - cpu
+      - memory
+    requests:
+      - cpu
+      - memory
