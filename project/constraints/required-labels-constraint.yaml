@@ -7,8 +7,7 @@ spec:
     kinds:
       - apiGroups: [""]
         kinds: ["Namespace"]
-    excludedNamespaces:
-    - kube*
-    - default
   parameters:
-    labels: ["Owner"]
+    message: "All namespaces must have an 'owner' label with the name of the creator"
+    labels: 
+      - key: owner
