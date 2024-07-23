@@ -3,11 +3,12 @@ kind: Ingress
 metadata:
   name: example-ingress
   namespace: intern
-  # annotations:
+  annotations:
+    kubernetes.io/ingress.allow-http: "false"
     # cert-manager.io/cluster-issuer: "letsencrypt-production"
 spec:
   ingressClassName: nginx
-  # tls:
+  tls: [{}]
   #   - secretName: intern.fts1.nbspreview.com
   #     hosts:
   #     - intern.fts1.nbspreview.com
@@ -15,7 +16,7 @@ spec:
     - host: intern.fts1.nbspreview.com
       http:
         paths:
-          - path: /quote
+          - path: /
             pathType: Prefix
             backend:
               service:
