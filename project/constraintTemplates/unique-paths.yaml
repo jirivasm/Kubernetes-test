@@ -1,0 +1,30 @@
+apiVersion: templates.gatekeeper.sh/v1
+kind: ConstraintTemplate
+metadata:
+  name: k8singressuniquepath
+spec:
+  crd:
+    spec:
+      names:
+        kind: K8sIngressUniquePath
+      validation:
+        # Schema for the `parameters` field
+        openAPIV3Schema:
+          type: object
+          properties:
+            path:
+              type: array
+              description: Disallowed paths.
+              items:
+                type: string
+  targets:
+    - target: admission.k8s.gatekeeper.sh
+      rego: |
+        package main
+        violation[{"msg": msg}] {
+          input.review.object.kind == "Ingress"
+          input.review.object.metadata.namespace == input.review.namespace
+          #input.review.object.spec.rules[_].http.paths[_].path == input.parameters.path[_]
+          count(input.review.object.spec.rules[_].http.paths[_]) > 1
+          msg := sprintf("Ingress with duplicate path '%v' not allowed", [input.parameters.path])
+        }

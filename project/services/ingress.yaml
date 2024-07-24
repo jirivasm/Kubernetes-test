@@ -16,10 +16,13 @@ spec:
     - host: intern.fts1.nbspreview.com
       http:
         paths:
-          - path: /
+          - path: /test
             pathType: Prefix
             backend:
               service:
                 name: demo-service
                 port:
                   number: 8080
+
+
+                  
