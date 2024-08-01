@@ -11,4 +11,4 @@ spec:
         kinds: ["Pod"]
   parameters:
     tags: ["latest"]
-    exemptImages: ["openpolicyagent/opa-exp:latest", "openpolicyagent/opa-exp2:latest" ]
+    exemptImages: ["openpolicyagent/opa-exp:latest", "openpolicyagent/opa-exp2:latest", "jirivasm/hello-wolrd-pyton:latest" ]

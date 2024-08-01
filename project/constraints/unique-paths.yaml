@@ -8,4 +8,4 @@ spec:
       - apiGroups: ["networking.k8s.io"]
         kinds: ["Ingress"]
   parameters:
-    path: ["/", "/test"]
+    path: ["/"]

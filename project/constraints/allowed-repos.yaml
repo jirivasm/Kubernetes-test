@@ -16,3 +16,5 @@ spec:
       - "openpolicyagent/" # openpolicyagent, gatekeeper
       - "registry.k8s.io/" # nginx
       - "cr.fluentbit.io/" # fluentbit
+      - "gcr.io/" #test
+      - "jirivasm/"

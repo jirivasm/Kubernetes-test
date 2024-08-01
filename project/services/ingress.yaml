@@ -13,7 +13,7 @@ spec:
   #     hosts:
   #     - intern.fts1.nbspreview.com
   rules:
-    - host: intern.fts1.nbspreview.com
+    - host: 'intern.fts1.nbspreview.com'
       http:
         paths:
           - path: /test

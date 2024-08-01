@@ -27,14 +27,13 @@ spec:
           runAsNonRoot: true
           capabilities:
            drop: ["ALL"]
-          
         resources:
           limits:
-            memory: "2Gi"
-            cpu: "500m"
+            memory: "1Gi"
+            cpu: "200m"
           requests:
             memory: "128Mi"
-            cpu: "500m"
+            cpu: "200m"
         ports:
         - containerPort: 8080
       
